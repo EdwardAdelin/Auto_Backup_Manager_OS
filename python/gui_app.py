@@ -93,7 +93,9 @@ def update_inputs():
 # Create the main application window
 root = tk.Tk()
 root.title("File and Directory Input App")
-root.geometry("400x450")  # Set the size of the window
+
+# Set the size of the window to 800x800
+root.geometry("800x800")
 
 # Source file input
 source_file_label = tk.Label(root, text="Source File:")
