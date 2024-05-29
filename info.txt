@@ -1,0 +1,14 @@
+#OS project (FILS 2nd year, 2nd semester)
+
+#Schematic:
+
+- Python GUI app:
+    1. Select source directory
+    2. Select destination of backup
+    3. Select a schedule
+    4. Overview of selection
+
+- Bash scripting:
+    1. Backups data
+    2. Recives important information about backup
+    3. Secures information
