@@ -16,19 +16,32 @@ if [ "$BACKUP_DATE" == "now" ]; then
     exit 0
 fi
 
-# Perform backup based on frequency
-if [ "$BACKUP_DATE" == "daily" ] || [ "$BACKUP_DATE" == "weekly" ] || [ "$BACKUP_DATE" == "monthly" ]; then
-    perform_backup
-    exit 0
-fi
-
-# If a specific date is given
+# Perform backup based on the date
 if [[ "$BACKUP_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
     CURRENT_DATE=$(date +%Y-%m-%d)
     if [ "$BACKUP_DATE" == "$CURRENT_DATE" ]; then
         perform_backup
         exit 0
+    else
+        echo "Scheduled backup for $BACKUP_DATE."
+        exit 0
     fi
+fi
+
+# Perform backup based on the frequency
+if [ "$BACKUP_DATE" == "daily" ]; then
+    perform_backup
+    exit 0
+fi
+
+if [ "$BACKUP_DATE" == "weekly" ]; then
+    perform_backup
+    exit 0
+fi
+
+if [ "$BACKUP_DATE" == "monthly" ]; then
+    perform_backup
+    exit 0
 fi
 
 # If none of the conditions match, the backup is not scheduled

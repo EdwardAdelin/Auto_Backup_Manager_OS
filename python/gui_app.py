@@ -63,7 +63,7 @@ def submit():
             cron_command = f"(crontab -l 2>/dev/null; echo \"{cron_job}\") | crontab -"
 
             try:
-                subprocess.run(cron_command, shell=True, check=True, user=user)
+                subprocess.run(cron_command, shell=True, check=True)
                 messagebox.showinfo("Success", "Backup operation scheduled.")
             except subprocess.CalledProcessError as e:
                 messagebox.showerror("Error", f"Failed to schedule backup: {e}")
