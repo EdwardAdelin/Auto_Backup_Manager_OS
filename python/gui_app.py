@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox, filedialog
 from tkcalendar import DateEntry
+import subprocess
+import os
 
 # Function to open a file dialog
 def browse_file(entry_widget):
@@ -27,8 +29,18 @@ def submit():
         messagebox.showwarning("Input Error", "All fields are required.")
         return
 
-    backup_status = "Yes" if backup_immediately else "No"
-    messagebox.showinfo("Information", f"Source File: {source_file}\nOutput Directory: {output_dir}\nDate: {date}\nBackup Immediately: {backup_status}")
+    # If "Backup immediately" is checked, set date to "now"
+    if backup_immediately:
+        date = "now"
+
+    bash_script_path = os.path.join(os.path.dirname(__file__), '..', 'bash', 'backup.sh')
+
+    try:
+        # Execute the bash script with provided arguments
+        subprocess.run([bash_script_path, source_file, output_dir, date], check=True)
+        messagebox.showinfo("Success", "Backup operation scheduled.")
+    except subprocess.CalledProcessError as e:
+        messagebox.showerror("Error", f"Failed to schedule backup: {e}")
 
 # Function to toggle date entry based on checkbox state
 def toggle_date_entry():
@@ -59,7 +71,7 @@ output_dir_browse_button = tk.Button(root, text="Browse", command=lambda: browse
 output_dir_browse_button.pack(pady=5)
 
 # Date input
-date_label = tk.Label(root, text="Date (YYYY-MM-DD):")
+date_label = tk.Label(root, text="Date (YYYY-MM-DD HH:MM):")
 date_label.pack(pady=5)
 date_entry = DateEntry(root, width=47, background='darkblue', foreground='white', borderwidth=2, date_pattern='yyyy-mm-dd')
 date_entry.pack(pady=5)
