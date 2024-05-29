@@ -28,21 +28,21 @@ if [[ "$BACKUP_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
     fi
 fi
 
-# Perform backup based on the frequency
-if [ "$BACKUP_DATE" == "daily" ]; then
-    perform_backup
-    exit 0
-fi
+# Perform backup based on the frequency (possible to use if Python not used for this)
+# if [ "$BACKUP_DATE" == "daily" ]; then
+#     perform_backup
+#     exit 0
+# fi
 
-if [ "$BACKUP_DATE" == "weekly" ]; then
-    perform_backup
-    exit 0
-fi
+# if [ "$BACKUP_DATE" == "weekly" ]; then
+#     perform_backup
+#     exit 0
+# fi
 
-if [ "$BACKUP_DATE" == "monthly" ]; then
-    perform_backup
-    exit 0
-fi
+# if [ "$BACKUP_DATE" == "monthly" ]; then
+#     perform_backup
+#     exit 0
+# fi
 
 # If none of the conditions match, the backup is not scheduled
 echo "Backup not scheduled."
