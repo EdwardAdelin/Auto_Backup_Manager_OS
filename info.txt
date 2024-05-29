@@ -22,3 +22,5 @@
 - Open app and complete all rows (in "python" folder)
 - You can check using <crontab -l> all of the scheduled actions
 - You can remove all scheduled actions using <crontab -r>
+
+Happy backup experience! Thank you!
